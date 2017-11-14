@@ -1,1 +1,3 @@
 # RentaMovies
+# RentAMovie
+# RentaPelis
