@@ -1,10 +1,6 @@
 package source;
 
 import java.sql.*;
-/**
- *
- * @author lbren
- */
 
 public class conexion {
     private Connection myDBCon;
@@ -20,7 +16,7 @@ public class conexion {
         try{
             myDBCon = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","hr","hr");
             st = myDBCon.createStatement();
-            System.out.println("Conexion Exitosa.");
+            System.out.println("Conexion Exitosa!");
         } catch(Exception ex){
             System.err.println("Error: " + ex.getMessage());
         }
