@@ -85,10 +85,10 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 160, 40));
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Correo / Username");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 140, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 160, 30));
 
         txtUser.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         txtUser.setForeground(new java.awt.Color(195, 195, 216));
@@ -101,10 +101,10 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 180, 30));
 
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Contrasenna");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 90, 30));
+        jLabel2.setText("Contraseña");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 90, 30));
 
         txtPass.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -194,7 +194,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(ColorBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 40));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/result.jpg"))); // NOI18N
-        fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 2, true));
+        fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 330));
 
         pack();
