@@ -1,8 +1,8 @@
 --en el sql plus o sql command line escribe esto: 
---create user proyecto identified by 1234;
+create user proyecto identified by 1234;
 --le da enter
 grant all privileges to proyecto;
---le da enter de nuevo y listo, un nuevo usuario donde tener nuestras bases de datos hahaha
+--le da enter de nuevo y listo, un nuevo usuario donde tener la base de datos del proyecto hahaha
 create table Cliente(id_cliente number(4), fecha_Nacimiento date, email nvarchar2(30),
                      direccion nvarchar2(150), num_telefono number(10), nombre_Cliente nvarchar2(30) );
 
@@ -41,6 +41,7 @@ begin
   return resultado;
 end;
 /
+
 /*
 --funcion o sp para registrar vendedores...
 create or replace procedure spRegistroV(pass in nvarchar2, fecha_nac in date, mail in nvarchar2, nombre in nvarchar2,
@@ -54,3 +55,6 @@ begin
 end;
 /
 */
+=======
+--funcion o sp para registrar...
+
