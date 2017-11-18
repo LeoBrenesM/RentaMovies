@@ -69,7 +69,6 @@ public class Registrar extends javax.swing.JFrame {
         btnRegistrar.setBackground(new java.awt.Color(204, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
-        btnRegistrar.setActionCommand("Registrar");
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -328,6 +327,9 @@ public class Registrar extends javax.swing.JFrame {
             connect.registrar( txtPass1.getText(), Integer.parseInt(txtDia.getText()),Integer.parseInt(txtMes.getText())
                     , Integer.parseInt(txtanno.getText()), txtUser.getText(), txtNombre.getText(),
                     Integer.parseInt(txtnum.getText()), txtDireccion1.getText());
+            this.dispose();
+            Login ventana = new Login();
+            ventana.setVisible(true);
         }
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
