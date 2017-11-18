@@ -41,4 +41,14 @@ begin
   return resultado;
 end;
 /
---funcion o sp para registrar...
+--funcion o sp para registrar vendedores...
+create or replace procedure spRegistroV(pass in nvarchar2, fecha_nac in date, mail in nvarchar2, nombre in nvarchar2,
+                                       numero in number, direccion in nvarchar2)
+as
+  cant number;
+begin
+  select fnCant into cant from dual;
+  insert into Vendedor values(cant+1, pass, fecha_nac, mail, nombre, numero, direccion);
+  commit;
+end;
+/
