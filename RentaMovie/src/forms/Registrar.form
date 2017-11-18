@@ -36,7 +36,6 @@
           <Font name="Sitka Text" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Registrar"/>
-        <Property name="actionCommand" type="java.lang.String" value="Registrar"/>
         <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>

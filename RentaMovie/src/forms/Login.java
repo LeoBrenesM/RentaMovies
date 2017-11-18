@@ -143,9 +143,10 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 40));
 
         cerrar.setBackground(new java.awt.Color(46, 51, 58));
+        cerrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cerrar.setForeground(new java.awt.Color(255, 255, 255));
         cerrar.setText("X");
-        cerrar.setBorder(null);
+        cerrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cerrar.setBorderPainted(false);
         cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cerrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -179,10 +180,10 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 60, 40));
 
         ColorBarra.setBackground(new java.awt.Color(46, 51, 58));
-        ColorBarra.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        ColorBarra.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
         ColorBarra.setForeground(new java.awt.Color(255, 255, 255));
         ColorBarra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ColorBarra.setText("Login Vendedores");
+        ColorBarra.setText(" Login Vendedores");
         ColorBarra.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         ColorBarra.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         ColorBarra.setOpaque(true);
@@ -195,6 +196,11 @@ public class Login extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/result.jpg"))); // NOI18N
         fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        fondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                fondoMouseMoved(evt);
+            }
+        });
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 330));
 
         pack();
@@ -250,7 +256,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarMouseMoved
 
     private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
-        //this.dispose(); no utilizo el dispose para que termine losnhilos activos
+        //this.dispose(); no utilizo el dispose para que termine los hilos activos
         System.exit(0);
     }//GEN-LAST:event_cerrarMouseClicked
 
@@ -280,12 +286,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassKeyPressed
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
+        Registrar ventana = new Registrar();
+        ventana.setVisible(true);
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
+        cerrar.setBackground(new Color(46, 51, 58));
+        minimizar.setBackground(new Color(46, 51, 58));
+    }//GEN-LAST:event_fondoMouseMoved
 
     /**
      * @param args the command line arguments
