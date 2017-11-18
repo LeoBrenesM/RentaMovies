@@ -41,6 +41,7 @@ begin
   return resultado;
 end;
 /
+/*
 --funcion o sp para registrar vendedores...
 create or replace procedure spRegistroV(pass in nvarchar2, fecha_nac in date, mail in nvarchar2, nombre in nvarchar2,
                                        numero in number, direccion in nvarchar2)
@@ -52,3 +53,4 @@ begin
   commit;
 end;
 /
+*/
