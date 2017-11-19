@@ -323,13 +323,16 @@ public class Registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassKeyPressed
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        if (txtnum.getText() != null) {
-            connect.registrar( txtPass1.getText(), Integer.parseInt(txtDia.getText()),Integer.parseInt(txtMes.getText())
+        if (connect.registrar( txtPass1.getText(), Integer.parseInt(txtDia.getText()),Integer.parseInt(txtMes.getText())
                     , Integer.parseInt(txtanno.getText()), txtUser.getText(), txtNombre.getText(),
-                    Integer.parseInt(txtnum.getText()), txtDireccion1.getText());
+                    Integer.parseInt(txtnum.getText()), txtDireccion1.getText())) {
+            
+            JOptionPane.showMessageDialog(null, "Registrado Correctamente");
             this.dispose();
             Login ventana = new Login();
             ventana.setVisible(true);
+        } else{
+            JOptionPane.showMessageDialog(null, "No Registrado Correctamente");
         }
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
@@ -356,9 +359,9 @@ public class Registrar extends javax.swing.JFrame {
 
     private void txtPass1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPass1KeyReleased
         if (txtPass.getText().equals(txtPass1.getText())) {
-            txtPass1.setBackground(new Color(51,222,51));
+            txtPass1.setBackground(new Color(116,255,116));
         } else{
-            txtPass1.setBackground(new Color(222, 51, 51));
+            txtPass1.setBackground(new Color(255,128,128));
         }
     }//GEN-LAST:event_txtPass1KeyReleased
 
