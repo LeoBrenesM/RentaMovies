@@ -39,7 +39,7 @@ public class conexion {
             return bool;
         }
     }
-    
+    // aqui abajo ↓
     public boolean registrar(String pass, int dia, int mes, int anno,
             String mail, String nombre, int num, String direccion){
         boolean bool = false;
@@ -53,4 +53,5 @@ public class conexion {
         }   
         return bool;
     }
+    
 }
