@@ -43,31 +43,14 @@ public class conexion {
     public boolean registrar(String pass, int dia, int mes, int anno,
             String mail, String nombre, int num, String direccion){
         boolean bool = false;
-        //try{
-            /*String sql = "execute spRegistroV('"+pass+"',TO_DATE('"+dia+"/"+mes+"/"+anno+"','dd/mm/yyyy'),"
-                    + "'"+mail+"', '"+nombre+"', "+num+", '"+direccion+"')";*/
-            
-
-            CallableStatement cs;
+        CallableStatement cs;
         try {
             cs = myDBCon.prepareCall("{call spRegistroV('"+pass+"',TO_DATE('"+dia+"/"+mes+"/"+anno+"','dd/mm/yyyy')," +
                      "'"+mail+"', '"+nombre+"', "+num+", '"+direccion+"') }");
             cs.execute();
         } catch (Exception ex) {
             System.out.println("error: " + ex.getMessage());;
-        }
-            
-
-
-            /*rs = st.executeQuery(sql);
-            while(rs.next()){
-                
-            }*/
-            
-            return bool;
-       /* } catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-            return bool;
-        }*/
+        }   
+        return bool;
     }
 }
