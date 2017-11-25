@@ -71,6 +71,6 @@ public class conexion {
         return bool;
     }
     public boolean ActualizarC(){
-        
+        return true;
     }
 }
