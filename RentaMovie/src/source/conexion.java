@@ -1,6 +1,7 @@
 package source;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,7 +71,29 @@ public class conexion {
         }   
         return bool;
     }
+    
+    public ArrayList<Cliente> buscarCl(){
+        
+        ArrayList<Cliente> sClientes = new ArrayList<>();
+        
+        try{
+            String sql = "select fnBuscaClientes()";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Cliente sCliente = new Cliente();
+                sCliente.setCodigo(rs.getInt("codigo"));
+                sCliente.setNombre_cliente(rs.getString("nombre"));
+                sCliente.setFecha_nac(rs.getDate("fecha_nac"));
+                sCliente.setEmail(rs.getString("email"));
+                sClientes.add(sCliente);
+            }
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sClientes;
+    }
+    
     public boolean ActualizarC(){
-        return true;
+        return false;
     }
 }
