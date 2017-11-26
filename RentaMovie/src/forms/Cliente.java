@@ -6,6 +6,10 @@
 package forms;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import source.conexion;
 
 /**
  *
@@ -18,9 +22,17 @@ public class Cliente extends javax.swing.JFrame {
      */
     
     int x,y;
+    conexion connect = new conexion();
+    DefaultTableModel dtm = new DefaultTableModel();
+    
     
     public Cliente() {
+        connect.conectarse();
         initComponents();
+        String [] titulo = new String[]{"Codigo", "Nombre", "Fecha de Nacimiento"};
+        dtm.setColumnIdentifiers(titulo);
+        jTable1.setModel(dtm);
+        
     }
 
     /**
@@ -35,8 +47,27 @@ public class Cliente extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Registrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txtNombre_Buscar = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtMes = new javax.swing.JTextField();
+        txtAnno = new javax.swing.JTextField();
+        txtDia = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDireccion = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
         minimizar = new javax.swing.JButton();
@@ -52,19 +83,99 @@ public class Cliente extends javax.swing.JFrame {
 
         Registrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Actualizar");
+        jLabel1.setText("buscar por nombre:");
         Registrar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 32));
+
+        txtNombre_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombre_BuscarActionPerformed(evt);
+            }
+        });
+        txtNombre_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombre_BuscarKeyReleased(evt);
+            }
+        });
+        Registrar.add(txtNombre_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 80, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "fecha nacimiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Short.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        Registrar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 130));
 
         jTabbedPane1.addTab("Actualizar", Registrar);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Registrar");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jLabel3.setText("Año");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 30, -1));
+        jPanel2.add(txtMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 30, -1));
+        jPanel2.add(txtAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 30, -1));
+        jPanel2.add(txtDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 30, -1));
+
+        jLabel4.setText("Fecha Nacimiento");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        jLabel5.setText("Dia");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 20, -1));
+
+        jLabel6.setText("Mes");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 30, -1));
+
+        txtCorreo.setName(""); // NOI18N
+        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 140, -1));
+
+        jLabel7.setText("Correo");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        txtDireccion.setColumns(20);
+        txtDireccion.setRows(5);
+        jScrollPane1.setViewportView(txtDireccion);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 250, -1));
+
+        jLabel8.setText("direccion");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+
+        jLabel9.setText("nombre");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
+        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 140, -1));
+
+        jLabel10.setText("numero");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
+        jPanel2.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 140, -1));
+
+        jButton1.setText("Registrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
 
         jTabbedPane1.addTab("Registrar", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 600, 390));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 600, 390));
 
         mover.setBackground(new java.awt.Color(46, 51, 58));
         mover.setBorderPainted(false);
@@ -135,7 +246,7 @@ public class Cliente extends javax.swing.JFrame {
         ColorBarra.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
         ColorBarra.setForeground(new java.awt.Color(255, 255, 255));
         ColorBarra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ColorBarra.setText(" Menu Principal");
+        ColorBarra.setText(" Gestion de Clientes");
         ColorBarra.setToolTipText("");
         ColorBarra.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         ColorBarra.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -215,6 +326,40 @@ public class Cliente extends javax.swing.JFrame {
         minimizar.setBackground(new Color(0, 102, 102));
     }//GEN-LAST:event_minimizarMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        /*
+        int dia,int mes,int anno,String mail, String nombre, int num, String direccion
+        */
+        
+        if (connect.registrarC(Integer.parseInt(txtDia.getText()), Integer.parseInt(txtMes.getText()),
+                Integer.parseInt(txtAnno.getText()), txtCorreo.getText(), txtNombre.getText(),
+                Integer.parseInt(txtNumero.getText()), txtDireccion.getText())) {
+            JOptionPane.showMessageDialog(null, "Cliente registrado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente no registrado");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void txtNombre_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre_BuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombre_BuscarActionPerformed
+
+    private void txtNombre_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre_BuscarKeyReleased
+        ArrayList<source.Cliente> resultado = new ArrayList<>();
+        resultado = connect.buscarCl(txtNombre_Buscar.getText().toUpperCase());
+        dtm.setRowCount(0);
+        for(source.Cliente client : resultado) {
+            if (client.getNombre_cliente() != null) {
+                dtm.addRow(new Object[]{
+                    client.getCodigo(),
+                    client.getNombre_cliente(),
+                    client.getFecha_nac().toString()
+                });
+            }
+        }
+        
+    }//GEN-LAST:event_txtNombre_BuscarKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -255,11 +400,30 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JPanel Registrar;
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton mover;
+    private javax.swing.JTextField txtAnno;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDia;
+    private javax.swing.JTextArea txtDireccion;
+    private javax.swing.JTextField txtMes;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre_Buscar;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }
