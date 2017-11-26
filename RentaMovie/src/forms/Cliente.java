@@ -28,7 +28,11 @@ public class Cliente extends javax.swing.JFrame {
     
     public Cliente() {
         connect.conectarse();
+        
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        
         String [] titulo = new String[]{"Codigo", "Nombre", "Fecha de Nacimiento"};
         dtm.setColumnIdentifiers(titulo);
         jTable1.setModel(dtm);
@@ -81,6 +85,7 @@ public class Cliente extends javax.swing.JFrame {
 
         jTabbedPane1.setBackground(new java.awt.Color(46, 150, 161));
 
+        Registrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Registrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("buscar por nombre:");
