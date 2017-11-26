@@ -133,19 +133,19 @@ public class Cliente extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Año");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 30, -1));
-        jPanel2.add(txtMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 30, -1));
-        jPanel2.add(txtAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 30, -1));
-        jPanel2.add(txtDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 30, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 30, -1));
+        jPanel2.add(txtMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 30, -1));
+        jPanel2.add(txtAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 40, -1));
+        jPanel2.add(txtDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 30, -1));
 
         jLabel4.setText("Fecha Nacimiento");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jLabel5.setText("Dia");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 20, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 20, -1));
 
         jLabel6.setText("Mes");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 30, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 30, -1));
 
         txtCorreo.setName(""); // NOI18N
         jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 140, -1));
