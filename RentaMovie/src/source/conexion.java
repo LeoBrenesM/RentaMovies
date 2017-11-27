@@ -72,19 +72,19 @@ public class conexion {
         return bool;
     }
     
-    public ArrayList<Cliente> buscarCl(){
+    public ArrayList<Cliente> buscarCl(String nombre_buscar){
         
         ArrayList<Cliente> sClientes = new ArrayList<>();
         
         try{
-            String sql = "select fnBuscaClientes()";
+            String sql = "select id_cliente, nombre_cliente, fecha_nacimiento from Cliente where UPPER(nombre_cliente) like '" +
+                    nombre_buscar + "%' order by nombre_cliente";
             rs = st.executeQuery(sql);
             while(rs.next()){
                 Cliente sCliente = new Cliente();
-                sCliente.setCodigo(rs.getInt("codigo"));
-                sCliente.setNombre_cliente(rs.getString("nombre"));
-                sCliente.setFecha_nac(rs.getDate("fecha_nac"));
-                sCliente.setEmail(rs.getString("email"));
+                sCliente.setCodigo(rs.getInt("id_cliente"));
+                sCliente.setNombre_cliente(rs.getString("nombre_cliente"));
+                sCliente.setFecha_nac(rs.getDate("fecha_nacimiento"));
                 sClientes.add(sCliente);
             }
         }catch(SQLException ex){
