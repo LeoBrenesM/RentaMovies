@@ -75,7 +75,6 @@ public class conexion {
     public ArrayList<Cliente> buscarCl(String nombre_buscar){
         
         ArrayList<Cliente> sClientes = new ArrayList<>();
-        
         try{
             String sql = "select id_cliente, nombre_cliente, fecha_nacimiento from Cliente where UPPER(nombre_cliente) like '" +
                     nombre_buscar + "%' order by nombre_cliente";
