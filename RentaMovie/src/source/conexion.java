@@ -2,8 +2,7 @@ package source;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import oracle.jdbc.OracleTypes;
 
 public class conexion {
     private Connection myDBCon;
@@ -27,7 +26,8 @@ public class conexion {
     
     public boolean logear(String username, String password){
         boolean bool = false;
-        try{
+        
+        /*try{
             String sql = "select fnLog('"+username+"','"+password+"') as \"resultado\" from dual";
             rs = st.executeQuery(sql);
             while(rs.next()){
@@ -39,7 +39,31 @@ public class conexion {
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
             return bool;
-        }
+        }*/
+        
+        String sql_statement = "{? = call pkVendedor.fnLog(?,?)}";
+        
+        try{
+            
+            CallableStatement stmt = myDBCon.prepareCall(sql_statement);
+            
+            stmt.registerOutParameter(1, OracleTypes.NUMBER);
+            stmt.setString(2, username);
+            stmt.setString(3, password);
+            
+            stmt.execute();
+            
+            rs = stmt.getResultSet();
+            
+            while(rs.next()){
+                bool = true;
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("error: " + ex.getMessage());
+            bool = false;
+        }   
+        return bool;
     }
     
     
@@ -48,7 +72,7 @@ public class conexion {
         boolean bool = false;
         CallableStatement cs;
         try {
-            cs = myDBCon.prepareCall("{call spRegistroV('"+pass+"',TO_DATE('"+dia+"/"+mes+"/"+anno+"','dd/mm/yyyy')," +
+            cs = myDBCon.prepareCall("{call pkVendedor.spRegistroV('"+pass+"',TO_DATE('"+dia+"/"+mes+"/"+anno+"','dd/mm/yyyy')," +
                      "'"+mail+"', '"+nombre+"', "+num+", '"+direccion+"') }");
             cs.execute();
             bool = true;
