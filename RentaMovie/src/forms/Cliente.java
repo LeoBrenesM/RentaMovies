@@ -7,6 +7,7 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
@@ -21,7 +22,9 @@ public class Cliente extends javax.swing.JFrame {
      * Creates new form Cliente
      */
     
-    int x,y;
+    int x,y, codigoo = -1;
+    java.sql.Date fecha_nacc;
+    
     conexion connect = new conexion();
     DefaultTableModel dtm = new DefaultTableModel();
     
@@ -54,6 +57,16 @@ public class Cliente extends javax.swing.JFrame {
         txtNombre_Buscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        a_correo = new javax.swing.JTextField();
+        a_numero = new javax.swing.JTextField();
+        a_nombre = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        A_direccion = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtMes = new javax.swing.JTextField();
@@ -74,6 +87,7 @@ public class Cliente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
+        minimizar1 = new javax.swing.JButton();
         minimizar = new javax.swing.JButton();
         ColorBarra = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -123,9 +137,43 @@ public class Cliente extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
-        Registrar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 130));
+        Registrar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 110));
+
+        jLabel11.setText("nombre");
+        Registrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
+
+        jLabel12.setText("numero");
+        Registrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jLabel13.setText("direccion");
+        Registrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, 20));
+
+        jLabel14.setText("Correo");
+        Registrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
+        Registrar.add(a_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 160, -1));
+        Registrar.add(a_numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 70, -1));
+        Registrar.add(a_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 160, -1));
+
+        A_direccion.setColumns(20);
+        A_direccion.setRows(5);
+        jScrollPane3.setViewportView(A_direccion);
+
+        Registrar.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 260, 110));
+
+        jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        Registrar.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
 
         jTabbedPane1.addTab("Actualizar", Registrar);
 
@@ -208,7 +256,7 @@ public class Cliente extends javax.swing.JFrame {
                 moverMousePressed(evt);
             }
         });
-        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 40));
+        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 40));
 
         cerrar.setBackground(new java.awt.Color(46, 51, 58));
         cerrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -228,6 +276,24 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 60, 40));
+
+        minimizar1.setBackground(new java.awt.Color(46, 51, 58));
+        minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
+        minimizar1.setForeground(new java.awt.Color(255, 255, 255));
+        minimizar1.setText("a");
+        minimizar1.setBorder(null);
+        minimizar1.setBorderPainted(false);
+        minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                minimizar1MouseMoved(evt);
+            }
+        });
+        minimizar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 60, 40));
 
         minimizar.setBackground(new java.awt.Color(46, 51, 58));
         minimizar.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
@@ -365,6 +431,60 @@ public class Cliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtNombre_BuscarKeyReleased
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int algo = jTable1.getSelectedRow();
+        String bus = "" + dtm.getValueAt(algo, 0);
+        
+        codigoo = Integer.parseInt(bus);
+        
+        source.Cliente iCliente = new source.Cliente();
+        
+        iCliente = connect.buscaCliente(codigoo);
+        
+        fecha_nacc = iCliente.getFecha_nac();
+        
+        a_nombre.setText(iCliente.getNombre_cliente());
+        A_direccion.setText(iCliente.getDireccion());
+        a_numero.setText("" + iCliente.getNum_telefono());
+        a_correo.setText(iCliente.getEmail());
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (codigoo == -1) {
+            JOptionPane.showMessageDialog(null,"Recuerda seleccionar un cliente");
+        } else{
+            if (connect.ActualizarC(codigoo, a_nombre.getText(),
+                    Integer.parseInt(a_numero.getText()), A_direccion.getText(), a_correo.getText())) {
+                codigoo = -1;
+                fecha_nacc = null;
+                ArrayList<source.Cliente> resultado = new ArrayList<>();
+                resultado = connect.buscarCl(txtNombre_Buscar.getText().toUpperCase());
+                dtm.setRowCount(0);
+                for(source.Cliente client : resultado) {
+                if (client.getNombre_cliente() != null) {
+                    dtm.addRow(new Object[]{
+                    client.getCodigo(),
+                    client.getNombre_cliente(),
+                    client.getFecha_nac().toString()
+                });
+            }
+        }
+                JOptionPane.showMessageDialog(null, "La actualizacion fue realizada");
+            } else{
+                JOptionPane.showMessageDialog(null, "La actualizacion NO fue realizada");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minimizar1MouseMoved
+
+    private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minimizar1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -401,13 +521,22 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea A_direccion;
     private javax.swing.JLabel ColorBarra;
     private javax.swing.JPanel Registrar;
+    private javax.swing.JTextField a_correo;
+    private javax.swing.JTextField a_nombre;
+    private javax.swing.JTextField a_numero;
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -418,9 +547,11 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton minimizar;
+    private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
     private javax.swing.JTextField txtAnno;
     private javax.swing.JTextField txtCorreo;
