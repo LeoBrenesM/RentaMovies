@@ -3,6 +3,8 @@ package source;
 import java.sql.*;
 import java.util.ArrayList;
 import oracle.jdbc.OracleTypes;
+import java.lang.Exception;
+import java.math.BigDecimal;
 
 public class conexion {
     private Connection myDBCon;
@@ -27,48 +29,34 @@ public class conexion {
     public boolean logear(String username, String password){
         boolean bool = false;
         
-        /*try{
-            String sql = "select fnLog('"+username+"','"+password+"') as \"resultado\" from dual";
-            rs = st.executeQuery(sql);
-            while(rs.next()){
-                if (rs.getString("resultado").equals("1")) {
-                    bool= true;
-                }
-            }
-            return bool;
-        } catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-            return bool;
-        }*/
-        
-        String sql_statement = "{? = call pkVendedor.fnLog(?,?)}";
+        String sql_statement = "{? = call pkVendedor.fnLog('" + username + "','" + password + "')}";
         
         try{
-            
             CallableStatement stmt = myDBCon.prepareCall(sql_statement);
-            
             stmt.registerOutParameter(1, OracleTypes.NUMBER);
-            stmt.setString(2, username);
-            stmt.setString(3, password);
-            
             stmt.execute();
             
-            rs = stmt.getResultSet();
+            BigDecimal resultado = (BigDecimal)stmt.getObject(1);
             
-            while(rs.next()){
-                bool = true;
+            String result;
+            result = "" + resultado;
+            
+            if(resultado == null){
+                bool = false;
+            } else{
+                if (result.equals("1")) {
+                    bool = true;
+                }
             }
-            
         } catch (SQLException ex) {
-            System.out.println("error: " + ex.getMessage());
+            System.out.println("error: " + ex.getMessage() +"\n"+ ex.getLocalizedMessage());
             bool = false;
-        }   
+        }
         return bool;
     }
     
     
-    public boolean registrar(String pass, int dia, int mes, int anno,
-            String mail, String nombre, int num, String direccion){
+    public boolean registrar(String pass, int dia, int mes, int anno, String mail, String nombre, int num, String direccion){
         boolean bool = false;
         CallableStatement cs;
         try {
@@ -78,7 +66,7 @@ public class conexion {
             bool = true;
         } catch (SQLException ex) {
             System.out.println("error: " + ex.getMessage());
-        }   
+        } 
         return bool;
     }
     
@@ -116,7 +104,80 @@ public class conexion {
         return sClientes;
     }
     
-    public boolean ActualizarC(){
-        return false;
+    public Cliente buscaCliente(int codigo){
+        Cliente scliente = new Cliente();
+        
+        try{
+            String sql = "SELECT fecha_nacimiento, nombre_cliente, email, num_telefono, direccion from cliente where id_cliente = " + codigo ;
+            rs= st.executeQuery(sql);
+            while(rs.next()){
+                scliente.setFecha_nac(rs.getDate("fecha_nacimiento"));
+                scliente.setNombre_cliente(rs.getString("nombre_cliente"));
+                scliente.setEmail(rs.getString("email"));
+                scliente.setNum_telefono(rs.getInt("num_telefono"));
+                scliente.setDireccion(rs.getString("direccion"));
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return scliente;
     }
+    
+    public boolean ActualizarC(int codigo, String nombre, int numero, String direccion, String correo){
+        boolean boo = false;
+        try{
+            CallableStatement cs;
+            //2, 'mail@mail.com', 'direccion por ahi', 88888888, 'Alejandro'
+            cs = myDBCon.prepareCall("{call pkCliente.spActualizarClient(" + codigo + ", '" + correo + "' , '" + direccion +
+                                    "', " + numero + ", '" + nombre + "') }");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return boo;
+    }
+    
+    public boolean RegistrarDir(String nombre){
+        boolean boo = false;
+        try{
+            CallableStatement cs;
+            cs = myDBCon.prepareCall("{call pkDirector.spAgregarDirector('" + nombre + "') }");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return boo;
+    }
+    public boolean RegistrarCat(String desc){
+        boolean boo = false;
+        try{
+            CallableStatement cs;
+            cs = myDBCon.prepareCall("{call pkCategoria.spAgregarCategoria('" + desc + "') }");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return boo;
+    }
+    
+    public ArrayList<Categoria> llenarCategorias(){
+        ArrayList<Categoria> sCategorias = new ArrayList<>();
+        try{
+            String sql = "select id_categoria, descripcion from categoria order by id_categoria asc";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Categoria iCate = new Categoria();
+                iCate.setId(rs.getInt("id_categoria"));
+                iCate.setDescripcion(rs.getString("descripcion"));
+                sCategorias.add(iCate);
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sCategorias;
+    }
+    
 }
