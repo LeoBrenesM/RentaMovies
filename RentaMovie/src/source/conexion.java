@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import oracle.jdbc.OracleTypes;
 import java.lang.Exception;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 
 public class conexion {
     private Connection myDBCon;
@@ -178,6 +179,66 @@ public class conexion {
             System.out.println("Error: " + ex.getMessage());
         }
         return sCategorias;
+    }
+    
+    public ArrayList<Director> llenarDirectores(){
+        ArrayList<Director> sDirectores = new ArrayList<>();
+        try{
+            String sql = "select id_director, nombre_director from director order by id_director asc";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Director iDirector = new Director();
+                iDirector.setId(rs.getInt("id_director"));
+                iDirector.setNombre(rs.getString("nombre_director"));
+                sDirectores.add(iDirector);
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sDirectores;
+    }
+    
+    public Boolean existePeli(String titulo){
+        boolean boo = false;
+        String sql_statement = "{? = call pkPelicula.fnexistepelicula('" + titulo + "')}";
+        
+        try{
+            CallableStatement stmt = myDBCon.prepareCall(sql_statement);
+            stmt.registerOutParameter(1, OracleTypes.NUMBER);
+            stmt.execute();
+            
+            int resultado = Integer.parseInt(""+stmt.getObject(1));
+            
+            
+            if(resultado == 0){
+                boo = true;
+            } else{
+                JOptionPane.showMessageDialog(null, "La pelicula ya existe!");
+            }
+        } catch (SQLException ex) {
+            System.out.println("error: " + ex.getMessage() +"\n"+ ex.getLocalizedMessage());
+            boo = false;
+        }
+        return boo;
+    }
+    
+    public Boolean registrarPelicula(int id_director, String nombre_peli, int dia,int mes,int anno){
+        //spagregarpelicula(id_director in nvarchar2, nombre_peli in nvarchar2, fecha_s in date)
+        boolean boo = false;
+        if (existePeli(nombre_peli)) {
+            try{
+                CallableStatement cs;
+                cs = myDBCon.prepareCall("{call pkPelicula.spagregarpelicula(" + id_director + ", '" + nombre_peli + "', "
+                      + "TO_DATE('" + dia + "/" + mes + "/" + anno + "','dd/mm/yyyy')) }");
+                cs.execute();
+                boo = true;
+            } catch(SQLException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+        } else{
+            
+        }
+        return boo;
     }
     
 }
