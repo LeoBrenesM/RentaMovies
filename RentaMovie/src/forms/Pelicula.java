@@ -22,7 +22,7 @@ public class Pelicula extends javax.swing.JFrame {
      * Creates new form Cliente
      */
     
-    int x,y, codigoo = -1;
+    int x,y, codigoo = -1, codigon = -3;
     String nombre_peli;
     java.sql.Date fecha_nacc;
     
@@ -127,7 +127,7 @@ public class Pelicula extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        txt_f_precio1 = new javax.swing.JTextField();
+        txt_f_nprecio = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         txt_f_precio = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -136,6 +136,19 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txt_f_nombre = new javax.swing.JTextField();
         Ejemplares = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        txtTituloB1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
         minimizar1 = new javax.swing.JButton();
@@ -407,13 +420,13 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel5.setText("Precio Nuevo:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        txt_f_precio1.setText("ej. 2000");
-        txt_f_precio1.addActionListener(new java.awt.event.ActionListener() {
+        txt_f_nprecio.setText("ej. 2000");
+        txt_f_nprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_f_precio1ActionPerformed(evt);
+                txt_f_nprecioActionPerformed(evt);
             }
         });
-        jPanel6.add(txt_f_precio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 120, 30));
+        jPanel6.add(txt_f_nprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 120, 30));
 
         Formato.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 270, 310));
 
@@ -455,7 +468,8 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel16.setText("Nombre");
         jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 50, -1));
 
-        txt_f_nombre.setText("ej. Barlon");
+        txt_f_nombre.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        txt_f_nombre.setText("ej. CD");
         txt_f_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_f_nombreActionPerformed(evt);
@@ -468,6 +482,99 @@ public class Pelicula extends javax.swing.JFrame {
         jTabbedPane1.addTab("Formato", Formato);
 
         Ejemplares.setBackground(new java.awt.Color(220, 220, 220));
+        Ejemplares.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(220, 230, 230));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setBackground(new java.awt.Color(200, 220, 220));
+        jLabel21.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(70, 70, 70));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("A G R E G A R");
+        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel21.setOpaque(true);
+        jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 40));
+
+        jButton6.setBackground(new java.awt.Color(100, 150, 150));
+        jButton6.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(250, 250, 250));
+        jButton6.setText("AGREGAR");
+        jButton6.setBorderPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jPanel8.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 140, 40));
+
+        txtTituloB1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloB1KeyReleased(evt);
+            }
+        });
+        jPanel8.add(txtTituloB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 290, -1));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+
+        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 340, 110));
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+
+        jPanel8.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 250, 90));
+
+        jLabel20.setText("Pelicula");
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel22.setText("Formato");
+        jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(190, 220, 215));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setText("Cantidad");
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jTextField1.setText("ej. 10");
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 90, -1));
+
+        jPanel8.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 110, 90));
+
+        Ejemplares.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 550, 350));
+
         jTabbedPane1.addTab("Ejemplar", Ejemplares);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 600, 420));
@@ -746,7 +853,26 @@ public class Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_cbCategoriaMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
+        if (codigon != -3) {
+            if (connect.actualizar_format("" + dtm2.getValueAt(codigon, 0), Integer.parseInt(txt_f_nprecio.getText()))) {
+                ArrayList<source.Formato> iformatos = new ArrayList<>();
+            iformatos = connect.formatos();
+            dtm2.setRowCount(0);
+        
+                for (source.Formato iForma : iformatos) {
+                    dtm2.addRow(new Object[]{
+                        iForma.getNombre_formato(),
+                        iForma.getPrecio(),
+                    });
+                }
+                JOptionPane.showMessageDialog(null, "Actualizado correctamente");
+            } else{
+                JOptionPane.showMessageDialog(null, "No actualizado correctamente");
+            }
+            codigon = -1;
+        } else{
+            JOptionPane.showMessageDialog(null, "Recuerda seleccionar un formato \n    para actualizarlo");
+        }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void txt_f_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_precioActionPerformed
@@ -776,12 +902,28 @@ public class Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_f_nombreActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        
+    codigon = jTable2.getSelectedRow();
     }//GEN-LAST:event_jTable2MouseClicked
 
-    private void txt_f_precio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_precio1ActionPerformed
+    private void txt_f_nprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_nprecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_f_precio1ActionPerformed
+    }//GEN-LAST:event_txt_f_nprecioActionPerformed
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void txtTituloB1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloB1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloB1KeyReleased
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -835,6 +977,7 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -847,6 +990,10 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -855,16 +1002,23 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
@@ -875,8 +1029,9 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreD;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtTituloB;
+    private javax.swing.JTextField txtTituloB1;
     private javax.swing.JTextField txt_f_nombre;
+    private javax.swing.JTextField txt_f_nprecio;
     private javax.swing.JTextField txt_f_precio;
-    private javax.swing.JTextField txt_f_precio1;
     // End of variables declaration//GEN-END:variables
 }
