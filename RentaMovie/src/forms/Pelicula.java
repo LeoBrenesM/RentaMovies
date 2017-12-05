@@ -23,10 +23,12 @@ public class Pelicula extends javax.swing.JFrame {
      */
     
     int x,y, codigoo = -1;
+    String nombre_peli;
     java.sql.Date fecha_nacc;
     
     conexion connect = new conexion();
     DefaultTableModel dtm = new DefaultTableModel();
+    DefaultTableModel dtm2 = new DefaultTableModel();
     
     
     public Pelicula() {
@@ -53,8 +55,24 @@ public class Pelicula extends javax.swing.JFrame {
         categorias = connect.llenarCategorias();
         cbCategoria.removeAllItems();
         for(source.Categoria categoria : categorias){
-            cbCategoria.addItem( categoria.getId() + " " + categoria.getDescripcion());
+            cbCategoria.addItem(categoria.getDescripcion());
         }
+        
+        //formatos
+        String [] titulo2 = new String[]{"Nombre","Pelicula"};
+        dtm2.setColumnIdentifiers(titulo2);
+        jTable2.setModel(dtm2);
+        
+        ArrayList<source.Formato> iformatos = new ArrayList<>();
+        iformatos = connect.formatos();
+        dtm2.setRowCount(0);
+        for (source.Formato iForma : iformatos) {
+            dtm2.addRow(new Object[]{
+                iForma.getNombre_formato(),
+                iForma.getPrecio(),
+            });
+        }
+        
     }
 
     /**
@@ -89,9 +107,9 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         txtTituloB = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         cbCategoria = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
+        Director_Categoria = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txtDescripcionC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -102,6 +120,22 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Formato = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txt_f_precio1 = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        txt_f_precio = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        txt_f_nombre = new javax.swing.JTextField();
+        Ejemplares = new javax.swing.JPanel();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
         minimizar1 = new javax.swing.JButton();
@@ -187,6 +221,11 @@ public class Pelicula extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 400, 90));
@@ -213,30 +252,34 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel19.setText("Categoria");
         jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 60, 20));
 
-        jButton4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jButton4.setText("Agregar");
-        jButton4.setToolTipText("");
-        jButton4.setActionCommand("Agregar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAgregar.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.setToolTipText("");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                btnAgregarMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 110, 30));
+        jPanel5.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 110, 30));
 
+        cbCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCategoriaMouseClicked(evt);
+            }
+        });
         jPanel5.add(cbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 140, -1));
 
         Registrar.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 190));
 
         jTabbedPane1.addTab("Peliculas", Registrar);
 
-        jPanel2.setBackground(new java.awt.Color(220, 220, 220));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Director_Categoria.setBackground(new java.awt.Color(220, 220, 220));
+        Director_Categoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(220, 230, 230));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -273,7 +316,7 @@ public class Pelicula extends javax.swing.JFrame {
         });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 140, 40));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 270, 310));
+        Director_Categoria.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 270, 310));
 
         jPanel3.setBackground(new java.awt.Color(220, 230, 230));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -310,9 +353,122 @@ public class Pelicula extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 140, 40));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 270, 310));
+        Director_Categoria.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 270, 310));
 
-        jTabbedPane1.addTab("Director / Categoria", jPanel2);
+        jTabbedPane1.addTab("Director / Categoria", Director_Categoria);
+
+        Formato.setBackground(new java.awt.Color(220, 220, 220));
+        Formato.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel6.setBackground(new java.awt.Color(220, 230, 230));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setBackground(new java.awt.Color(200, 220, 220));
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(70, 70, 70));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("A C T U I L Z A R");
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel13.setOpaque(true);
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 40));
+
+        jButton4.setBackground(new java.awt.Color(100, 150, 150));
+        jButton4.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(250, 250, 250));
+        jButton4.setText("ACTUALIZAR");
+        jButton4.setBorderPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jPanel6.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 180, 40));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 250, 90));
+
+        jLabel5.setText("Precio Nuevo:");
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        txt_f_precio1.setText("ej. 2000");
+        txt_f_precio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_f_precio1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(txt_f_precio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 120, 30));
+
+        Formato.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 270, 310));
+
+        jPanel7.setBackground(new java.awt.Color(220, 230, 230));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_f_precio.setText("ej. 2000");
+        txt_f_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_f_precioActionPerformed(evt);
+            }
+        });
+        jPanel7.add(txt_f_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 120, 30));
+
+        jLabel14.setText("Precio");
+        jPanel7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 50, -1));
+
+        jLabel15.setBackground(new java.awt.Color(200, 220, 220));
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(70, 70, 70));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("A G R E G A R");
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel15.setOpaque(true);
+        jPanel7.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 40));
+
+        jButton5.setBackground(new java.awt.Color(100, 150, 150));
+        jButton5.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(250, 250, 250));
+        jButton5.setText("AGREGAR");
+        jButton5.setBorderPainted(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 140, 40));
+
+        jLabel16.setText("Nombre");
+        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 50, -1));
+
+        txt_f_nombre.setText("ej. Barlon");
+        txt_f_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_f_nombreActionPerformed(evt);
+            }
+        });
+        jPanel7.add(txt_f_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 120, 30));
+
+        Formato.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 270, 310));
+
+        jTabbedPane1.addTab("Formato", Formato);
+
+        Ejemplares.setBackground(new java.awt.Color(220, 220, 220));
+        jTabbedPane1.addTab("Ejemplar", Ejemplares);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 600, 420));
         jTabbedPane1.getAccessibleContext().setAccessibleName("Registrar");
@@ -418,6 +574,7 @@ public class Pelicula extends javax.swing.JFrame {
 
         fondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        fondo.setOpaque(true);
         fondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 fondoMouseMoved(evt);
@@ -546,17 +703,22 @@ public class Pelicula extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         if (codigoo != -1) {
-            //TODO
+            if (connect.Agregar_Peli_Cate(nombre_peli, (String) cbCategoria.getSelectedItem())) {
+                JOptionPane.showMessageDialog(null, "Categoria '" + cbCategoria.getSelectedItem() +
+                        "'\n Agregada a la pelicula '" + nombre_peli + "' exitosamente!");
+                btnAgregar.enable(false);
+            }
+            codigoo = -1;
         } else{
             JOptionPane.showMessageDialog(null, "Recuerda seleccionar una pelicula y su respectiva categoria por agregar.");
         }
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_btnAgregarMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtTituloBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloBKeyReleased
         ArrayList<source.Pelicula> iPeliculas = new ArrayList<>();
@@ -571,6 +733,55 @@ public class Pelicula extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_txtTituloBKeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int algo = jTable1.getSelectedRow();
+        String bus = "" + dtm.getValueAt(algo, 0);
+        nombre_peli = (String) dtm.getValueAt(algo, 1);
+        codigoo = Integer.parseInt(bus);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void cbCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCategoriaMouseClicked
+        btnAgregar.enable(true);
+    }//GEN-LAST:event_cbCategoriaMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void txt_f_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_f_precioActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if (connect.agregar_formato(txt_f_nombre.getText(), Integer.parseInt(txt_f_precio.getText()))) {
+            ArrayList<source.Formato> iformatos = new ArrayList<>();
+            iformatos = connect.formatos();
+            dtm2.setRowCount(0);
+        
+            for (source.Formato iForma : iformatos) {
+                dtm2.addRow(new Object[]{
+                    iForma.getNombre_formato(),
+                    iForma.getPrecio(),
+                });
+            }
+            JOptionPane.showMessageDialog(null, "Formato Registrado");
+        } else{
+            JOptionPane.showMessageDialog(null, "Formato NO Registrado");
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void txt_f_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_f_nombreActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void txt_f_precio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_precio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_f_precio1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -610,7 +821,11 @@ public class Pelicula extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ColorBarra;
+    private javax.swing.JPanel Director_Categoria;
+    private javax.swing.JPanel Ejemplares;
+    private javax.swing.JPanel Formato;
     private javax.swing.JPanel Registrar;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JComboBox<String> cbDirector;
     private javax.swing.JButton cerrar;
@@ -619,28 +834,37 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
@@ -651,5 +875,8 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreD;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtTituloB;
+    private javax.swing.JTextField txt_f_nombre;
+    private javax.swing.JTextField txt_f_precio;
+    private javax.swing.JTextField txt_f_precio1;
     // End of variables declaration//GEN-END:variables
 }
