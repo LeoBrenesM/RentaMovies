@@ -57,6 +57,7 @@ public class Registrar extends javax.swing.JFrame {
         txtanno = new javax.swing.JTextField();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
+        minimizar1 = new javax.swing.JButton();
         minimizar = new javax.swing.JButton();
         ColorBarra = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -66,10 +67,15 @@ public class Registrar extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegistrar.setBackground(new java.awt.Color(204, 255, 255));
+        btnRegistrar.setBackground(new java.awt.Color(150, 200, 220));
         btnRegistrar.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.setBorderPainted(false);
+        btnRegistrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseMoved(evt);
+            }
+        });
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarMouseClicked(evt);
@@ -107,6 +113,7 @@ public class Registrar extends javax.swing.JFrame {
         getContentPane().add(lblcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, 30));
 
         txtPass.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        txtPass.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPassKeyPressed(evt);
@@ -143,7 +150,7 @@ public class Registrar extends javax.swing.JFrame {
         lblDireccion.setText("Direccion");
         getContentPane().add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 90, 30));
 
-        txtDireccion1.setColumns(20);
+        txtDireccion1.setColumns(15);
         txtDireccion1.setRows(5);
         txtdireccion.setViewportView(txtDireccion1);
 
@@ -196,7 +203,7 @@ public class Registrar extends javax.swing.JFrame {
                 moverMousePressed(evt);
             }
         });
-        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 40));
+        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 40));
 
         cerrar.setBackground(new java.awt.Color(46, 51, 58));
         cerrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -216,6 +223,24 @@ public class Registrar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 60, 40));
+
+        minimizar1.setBackground(new java.awt.Color(46, 51, 58));
+        minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
+        minimizar1.setForeground(new java.awt.Color(255, 255, 255));
+        minimizar1.setText("a");
+        minimizar1.setBorder(null);
+        minimizar1.setBorderPainted(false);
+        minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                minimizar1MouseMoved(evt);
+            }
+        });
+        minimizar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 60, 40));
 
         minimizar.setBackground(new java.awt.Color(46, 51, 58));
         minimizar.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
@@ -251,7 +276,7 @@ public class Registrar extends javax.swing.JFrame {
         getContentPane().add(ColorBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 40));
 
         fondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         fondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 fondoMouseMoved(evt);
@@ -343,6 +368,7 @@ public class Registrar extends javax.swing.JFrame {
     private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
+        btnRegistrar.setBackground(new Color(150,200,220));
     }//GEN-LAST:event_fondoMouseMoved
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
@@ -364,6 +390,20 @@ public class Registrar extends javax.swing.JFrame {
             txtPass1.setBackground(new Color(255,128,128));
         }
     }//GEN-LAST:event_txtPass1KeyReleased
+
+    private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minimizar1MouseMoved
+
+    private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
+        Login ventana = new Login();
+        this.dispose();
+        ventana.setVisible(true);        
+    }//GEN-LAST:event_minimizar1MouseClicked
+
+    private void btnRegistrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseMoved
+        btnRegistrar.setBackground(new Color(125,175,195));
+    }//GEN-LAST:event_btnRegistrarMouseMoved
 
     /**
      * @param args the command line arguments
@@ -396,10 +436,8 @@ public class Registrar extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Registrar().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Registrar().setVisible(true);
         });
     }
 
@@ -416,6 +454,7 @@ public class Registrar extends javax.swing.JFrame {
     private javax.swing.JLabel lblnombre;
     private javax.swing.JLabel lblnum;
     private javax.swing.JButton minimizar;
+    private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextArea txtDireccion1;
