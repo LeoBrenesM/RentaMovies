@@ -22,14 +22,14 @@ public class Pelicula extends javax.swing.JFrame {
      * Creates new form Cliente
      */
     
-    int x,y, codigoo = -1, codigon = -3;
+    int x,y, codigoo = -1, codigon = -3, codigo_peli_ejemplar = -1, codigo_formato_ejemplar = -1;
     String nombre_peli;
     java.sql.Date fecha_nacc;
     
     conexion connect = new conexion();
     DefaultTableModel dtm = new DefaultTableModel();
     DefaultTableModel dtm2 = new DefaultTableModel();
-    
+    DefaultTableModel dtm3 = new DefaultTableModel();
     
     public Pelicula() {
         connect.conectarse();
@@ -42,6 +42,10 @@ public class Pelicula extends javax.swing.JFrame {
         String [] titulo = new String[]{"Codigo", "Nombre de Pelicula"};
         dtm.setColumnIdentifiers(titulo);
         jTable1.setModel(dtm);
+        
+        String [] titulo3 = new String[]{"Codigo", "Nombre de Pelicula"};
+        dtm3.setColumnIdentifiers(titulo);
+        jTable3.setModel(dtm3);
         
         //directores combo box
         ArrayList<source.Director> directores = new ArrayList<>();
@@ -59,9 +63,10 @@ public class Pelicula extends javax.swing.JFrame {
         }
         
         //formatos
-        String [] titulo2 = new String[]{"Nombre","Pelicula"};
+        String [] titulo2 = new String[]{"Nombre","Precio"};
         dtm2.setColumnIdentifiers(titulo2);
         jTable2.setModel(dtm2);
+        jTable4.setModel(dtm2);
         
         ArrayList<source.Formato> iformatos = new ArrayList<>();
         iformatos = connect.formatos();
@@ -127,7 +132,7 @@ public class Pelicula extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        txt_f_nprecio = new javax.swing.JTextField();
+        txt_f_precion = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         txt_f_precio = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -148,7 +153,7 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_cantidad = new javax.swing.JTextField();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
         minimizar1 = new javax.swing.JButton();
@@ -420,13 +425,13 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel5.setText("Precio Nuevo:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        txt_f_nprecio.setText("ej. 2000");
-        txt_f_nprecio.addActionListener(new java.awt.event.ActionListener() {
+        txt_f_precion.setText("ej. 2000");
+        txt_f_precion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_f_nprecioActionPerformed(evt);
+                txt_f_precionActionPerformed(evt);
             }
         });
-        jPanel6.add(txt_f_nprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 120, 30));
+        jPanel6.add(txt_f_precion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 120, 30));
 
         Formato.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 270, 310));
 
@@ -553,7 +558,7 @@ public class Pelicula extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        jPanel8.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 250, 90));
+        jPanel8.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 250, 100));
 
         jLabel20.setText("Pelicula");
         jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
@@ -567,9 +572,14 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel23.setText("Cantidad");
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jTextField1.setText("ej. 10");
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 90, -1));
+        txt_cantidad.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        txt_cantidad.setText("ej. 10");
+        txt_cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cantidadActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 90, -1));
 
         jPanel8.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 110, 90));
 
@@ -687,7 +697,7 @@ public class Pelicula extends javax.swing.JFrame {
                 fondoMouseMoved(evt);
             }
         });
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 490));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -854,7 +864,7 @@ public class Pelicula extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (codigon != -3) {
-            if (connect.actualizar_format("" + dtm2.getValueAt(codigon, 0), Integer.parseInt(txt_f_nprecio.getText()))) {
+            if (connect.actualizar_format("" + dtm2.getValueAt(codigon, 0), Integer.parseInt(txt_f_precion.getText()))) {
                 ArrayList<source.Formato> iformatos = new ArrayList<>();
             iformatos = connect.formatos();
             dtm2.setRowCount(0);
@@ -903,27 +913,59 @@ public class Pelicula extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
     codigon = jTable2.getSelectedRow();
+    txt_f_precion.setText( "" + dtm2.getValueAt(codigon, 1));
     }//GEN-LAST:event_jTable2MouseClicked
 
-    private void txt_f_nprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_nprecioActionPerformed
+    private void txt_f_precionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_f_precionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_f_nprecioActionPerformed
+    }//GEN-LAST:event_txt_f_precionActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        // TODO add your handling code here:
+        // pfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        if (codigo_peli_ejemplar != -1) {
+            if (codigo_formato_ejemplar != -1) {
+                if (Integer.parseInt(txt_cantidad.getText()) > 0) {
+                    if (connect.ingreso_de_ejemplares(""+jTable3.getValueAt(codigo_peli_ejemplar, 1),
+                            ""+jTable4.getValueAt(codigo_formato_ejemplar, 0), Integer.parseInt(txt_cantidad.getText()))) {
+                        codigo_peli_ejemplar = -1;
+                        codigo_formato_ejemplar = -1;
+                        txt_cantidad.setText("0");
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(null, "Recuerda ingresar una cantidad correcta de peliculas.");
+                }
+            } else{
+                JOptionPane.showMessageDialog(null, "Recuerda Seleccionar el formato para los ejemplares.");
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "Recuerda Seleccionar la pelicula a la que se le ingresaran ejemplares.");
+        }
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void txtTituloB1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloB1KeyReleased
-        // TODO add your handling code here:
+        ArrayList<source.Pelicula> iPeliculas = new ArrayList<>();
+        iPeliculas = connect.buscaPelicula(txtTituloB1.getText().toUpperCase());
+        dtm3.setRowCount(0);
+        
+        for (source.Pelicula iPeli : iPeliculas) {
+            dtm3.addRow(new Object[]{
+                iPeli.getId(),
+                iPeli.getNombre_pelicula(),
+            });
+        }
     }//GEN-LAST:event_txtTituloB1KeyReleased
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-        // TODO add your handling code here:
+        codigo_peli_ejemplar = jTable3.getSelectedRow();
     }//GEN-LAST:event_jTable3MouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
-        // TODO add your handling code here:
+        codigo_formato_ejemplar = jTable4.getSelectedRow();
     }//GEN-LAST:event_jTable4MouseClicked
+
+    private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1018,7 +1060,6 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
@@ -1030,8 +1071,9 @@ public class Pelicula extends javax.swing.JFrame {
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtTituloB;
     private javax.swing.JTextField txtTituloB1;
+    private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_f_nombre;
-    private javax.swing.JTextField txt_f_nprecio;
     private javax.swing.JTextField txt_f_precio;
+    private javax.swing.JTextField txt_f_precion;
     // End of variables declaration//GEN-END:variables
 }
