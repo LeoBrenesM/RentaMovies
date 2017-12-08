@@ -56,6 +56,19 @@ public class conexion {
         return bool;
     }
     
+    public int id_vendedor(String username){
+        int id_vend = 1;
+        try{
+            String sql = "select id_vendedor from vendedor where email = '" + username + "'";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                id_vend = rs.getInt("id_vendedor");
+            }
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return id_vend;
+    }
     
     public boolean registrar(String pass, int dia, int mes, int anno, String mail, String nombre, int num, String direccion){
         boolean bool = false;
@@ -86,8 +99,8 @@ public class conexion {
     }
     
     public ArrayList<Cliente> buscarCl(String nombre_buscar){
-        
         ArrayList<Cliente> sClientes = new ArrayList<>();
+        
         try{
             String sql = "select id_cliente, nombre_cliente, fecha_nacimiento from Cliente where UPPER(nombre_cliente) like '" +
                     nombre_buscar + "%' order by nombre_cliente";
@@ -235,10 +248,141 @@ public class conexion {
             } catch(SQLException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
-        } else{
-            
         }
         return boo;
     }
+    
+    public ArrayList<source.Pelicula> buscaPelicula(String nombre){
+        ArrayList<source.Pelicula> sPeliculas = new ArrayList<>();
+        
+        try{
+            String sql = "select id_pelicula, nombre_Pelicula from Pelicula where UPPER(nombre_Pelicula) like '" +
+                    nombre + "%' order by nombre_Pelicula";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Pelicula iPelicula = new Pelicula();
+                iPelicula.setId(rs.getInt("id_pelicula"));
+                iPelicula.setNombre_pelicula(rs.getString("nombre_Pelicula"));
+                sPeliculas.add(iPelicula);
+            }
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sPeliculas;
+    }
+    
+    public Boolean Agregar_Peli_Cate(String nombre_peli, String nombre_cate){
+        boolean bool = false;
+        try{
+            CallableStatement cs;
+            cs = myDBCon.prepareCall("{call pkPeli_cate.spagregarpeli_cate('" + nombre_peli + "', '" + nombre_cate + "') }");
+            cs.execute();
+            bool = true;
+        } catch(SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return bool;
+    }
+    
+    public Boolean agregar_formato(String nombre, int precio){
+        boolean bool = false;
+        try{
+            CallableStatement cs;
+            cs = myDBCon.prepareCall("{ call pkFormato.sp_agregarFormato('" + nombre + "'," + precio + ") }");
+            cs.execute();
+            bool = true;
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return bool;
+    }
+    
+    public ArrayList<Formato> formatos(){
+        ArrayList<Formato> sformatos = new ArrayList<>();
+        
+        try{
+            String sql = "select id_formato, nombre_formato, precio from formato";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Formato iformato = new Formato();
+                iformato.setCodigo(rs.getInt("id_formato"));
+                iformato.setNombre_formato(rs.getString("nombre_formato"));
+                iformato.setPrecio(rs.getInt("precio"));
+                sformatos.add(iformato);
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sformatos;
+    }
+    
+    public Boolean actualizar_format(String nombre, int nuevo_precio){
+        boolean bool = false;
+        try{
+            CallableStatement cs = myDBCon.prepareCall("{ call pkFormato.sp_actualizarFormato('" + nombre + "'," + nuevo_precio + ") }");
+            cs.execute();
+            bool = true;
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return bool;
+    }
+    
+    public boolean ingreso_de_ejemplares(String nombre_peli, String formato, int cantidad_ejemplares){
+        boolean boo = false;
+        int contador = 0;
+        try{
+            while(contador < cantidad_ejemplares){
+            CallableStatement cs = myDBCon.prepareCall("{ call pkEjemplar.sp_agregar_ejemplar("
+                    + "'" + nombre_peli + "','" + formato + "' )}");
+            cs.execute();
+            boo = true;
+            contador++;
+            }
+        } catch(SQLException ex){
+            System.out.println("E r r o r :  " + ex.getMessage());
+        }
+        
+        return boo;
+    }
+    
+    public ArrayList<ejemplar_pelicula> busqueda_de_ejemplares_disponibles(String nombre_pelicula){
+        ArrayList<ejemplar_pelicula> sEjemplares = new ArrayList<>();
+        ResultSet rs2;
+        int codigo_peli; String nombre_pel;
+        try{
+            String sql = "select id_pelicula, nombre_pelicula from pelicula where upper(nombre_pelicula) like '" + nombre_pelicula + "%'", sql2;
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                codigo_peli = rs.getInt("id_pelicula");
+                nombre_pel = rs.getString("nombre_pelicula");
+                sql2 = "select id_ejemplar from ejemplar where id_pelicula = " + codigo_peli;
+                rs2 = st.executeQuery(sql2);
+                while(rs2.next()){
+                    ejemplar_pelicula ejemplar = new ejemplar_pelicula();
+                    ejemplar.setCodigo_ejemplar(rs2.getInt("id_ejemplar"));
+                    ejemplar.setNombre_peli(nombre_pel);
+                    sEjemplares.add(ejemplar);
+                }
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sEjemplares;
+    }
+    
+    public Boolean agregarFact(int id_vend, int id_cliente){
+        boolean boo = false;
+        try{
+            CallableStatement cs = myDBCon.prepareCall("{ call pkEjemplar. sp_agregar_f(" + id_vend + ", " + id_cliente + ")}");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex){
+            System.out.println("E r r o r :  " + ex.getMessage());
+        }
+        return boo;
+    }
+    
+    
     
 }
