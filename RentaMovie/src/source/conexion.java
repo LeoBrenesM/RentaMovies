@@ -374,7 +374,7 @@ public class conexion {
     public Boolean agregarFact(int id_vend, int id_cliente){
         boolean boo = false;
         try{
-            CallableStatement cs = myDBCon.prepareCall("{ call pkEjemplar. sp_agregar_f(" + id_vend + ", " + id_cliente + ")}");
+            CallableStatement cs = myDBCon.prepareCall("{ call pkFactura.sp_agregar_f(" + id_vend + ", " + id_cliente + ")}");
             cs.execute();
             boo = true;
         } catch(SQLException ex){
@@ -383,5 +383,29 @@ public class conexion {
         return boo;
     }
     
+    public source.Factura ultimaFac(){
+        Factura fac = new Factura();
+        try{
+            String sql = "select max(id_factura) as \"id\" from factura";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                fac.setId_factura(rs.getInt("id"));
+            }
+        }catch (SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return fac;
+    }
     
+    public Boolean agregarLinea(int id_fac, int id_ejemplar){
+        boolean boo = false;
+        try{
+            CallableStatement cs = myDBCon.prepareCall("{ call pkLinea.sp_agregar_linea(" + id_fac + ", " + id_ejemplar + ")}");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex){
+            System.out.println("E r r o r :  " + ex.getMessage());
+        }
+        return boo;
+    }
 }
