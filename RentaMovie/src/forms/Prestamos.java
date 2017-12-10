@@ -22,6 +22,9 @@ public class Prestamos extends javax.swing.JFrame {
     conexion connect = new conexion();
     DefaultTableModel dtm = new DefaultTableModel();
     DefaultTableModel dtm2 = new DefaultTableModel();
+    DefaultTableModel dtmClientes = new DefaultTableModel();
+    DefaultTableModel dtmFacturas = new DefaultTableModel();
+    
     
     public Prestamos(int id) {
         connect.conectarse();
@@ -37,6 +40,15 @@ public class Prestamos extends javax.swing.JFrame {
         dtm2.setColumnIdentifiers(titulo2);
         jTable1.setModel(dtm2);
         id_vend = id;
+        
+        String [] tituloC = new String[]{"Codigo", "Nombre", "Fecha de Nacimiento"};
+        dtmClientes.setColumnIdentifiers(titulo);
+        clientes.setModel(dtmClientes);
+        
+        String [] tituloF = new String[]{"Id_factura","Fecha Devolucion","Monto"};
+        dtmFacturas.setColumnIdentifiers(tituloF);
+        facturas_clientes.setModel(dtmFacturas);
+        
     }
 
     /**
@@ -69,6 +81,18 @@ public class Prestamos extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        clientes = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        facturas_clientes = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
         minimizar1 = new javax.swing.JButton();
@@ -81,6 +105,8 @@ public class Prestamos extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(250, 250, 250));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,6 +206,11 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel20.setOpaque(true);
         jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 30));
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
@@ -208,6 +239,90 @@ public class Prestamos extends javax.swing.JFrame {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 100, 50));
 
         jTabbedPane1.addTab("Factura", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(190, 200, 200));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        clientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clientesMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(clientes);
+
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 470, 120));
+
+        jLabel3.setFont(new java.awt.Font("Candara", 1, 35)); // NOI18N
+        jLabel3.setText(" 1");
+        jPanel7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, -1));
+
+        jLabel21.setText("Nombre cliente");
+        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 90, 20));
+
+        jLabel22.setBackground(new java.awt.Color(200, 220, 220));
+        jLabel22.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(70, 70, 70));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Devolver  disco");
+        jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel22.setOpaque(true);
+        jPanel7.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 30));
+
+        txtNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombre1KeyReleased(evt);
+            }
+        });
+        jPanel7.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 360, -1));
+
+        jButton4.setText("Devolver Discos");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 140, 40));
+
+        facturas_clientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        facturas_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                facturas_clientesMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(facturas_clientes);
+
+        jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 470, 140));
+
+        jLabel6.setText("Facturas");
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
+
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 530));
+
+        jTabbedPane1.addTab("Devolucion", jPanel2);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 600, 600));
 
@@ -402,7 +517,7 @@ public class Prestamos extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int algo = jTable1.getSelectedRow();
-        String bus = "" + dtm.getValueAt(algo, 0);
+        String bus = "" + dtm2.getValueAt(algo, 0);
         codigoo = Integer.parseInt(bus);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -457,6 +572,56 @@ public class Prestamos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void txtNombre1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyReleased
+        ArrayList<source.Cliente> resultado = new ArrayList<>();
+        resultado = connect.buscarCl(txtNombre1.getText().toUpperCase());
+        
+        dtmClientes.setRowCount(0);
+        
+        for(source.Cliente client : resultado) {
+            dtmClientes.addRow(new Object[]{
+                client.getCodigo(),
+                client.getNombre_cliente(),
+                client.getFecha_nac().toString()
+            });
+        }
+    }//GEN-LAST:event_txtNombre1KeyReleased
+
+    private void clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientesMouseClicked
+        int fila = clientes.getSelectedRow();
+        int codigo = (int) dtmClientes.getValueAt(fila, 0);
+        
+        ArrayList<source.Factura> iFacturas = connect.buscaFacturas(codigo);
+        dtmFacturas.setRowCount(0);
+        for(source.Factura ifac : iFacturas){
+            dtmFacturas.addRow(new Object[]{
+                ifac.getId_factura(),
+                ifac.getFecha_devolucion().toString(),
+                ifac.getTotal()
+            });
+        }
+        
+    }//GEN-LAST:event_clientesMouseClicked
+
+    private void facturas_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturas_clientesMouseClicked
+        int fila = facturas_clientes.getSelectedRow();
+        int codigo = (int) dtmFacturas.getValueAt(fila,0);
+        
+        if (connect.devuelveFactura(factura)) {
+            JOptionPane.showMessageDialog(null, "Factura devuelta correctamente");
+        } else{
+            JOptionPane.showMessageDialog(null, "Factura NO devuelta correctamente");
+        }
+    }//GEN-LAST:event_facturas_clientesMouseClicked
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -498,22 +663,33 @@ public class Prestamos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ColorBarra;
     private javax.swing.JButton cerrar;
+    private javax.swing.JTable clientes;
+    private javax.swing.JTable facturas_clientes;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
@@ -522,6 +698,7 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtTituloB;
     // End of variables declaration//GEN-END:variables
 }
