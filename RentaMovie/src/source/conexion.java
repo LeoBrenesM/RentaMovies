@@ -3,7 +3,6 @@ package source;
 import java.sql.*;
 import java.util.ArrayList;
 import oracle.jdbc.OracleTypes;
-import java.lang.Exception;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
@@ -346,29 +345,69 @@ public class conexion {
         return boo;
     }
     
-    public ArrayList<ejemplar_pelicula> busqueda_de_ejemplares_disponibles(String nombre_pelicula){
-        ArrayList<ejemplar_pelicula> sEjemplares = new ArrayList<>();
-        ResultSet rs2;
-        int codigo_peli; String nombre_pel;
+    public ArrayList<Ejemplar> busca_Ejemplar(String nombre_pelicula){
+        ArrayList<Pelicula> pelis;
+        ArrayList<Ejemplar> sEjemplar = new ArrayList<>();
+        pelis = buscaPelicula(nombre_pelicula);
+        String sql;
+        try {
+            for(Pelicula peli : pelis){
+                sql = "select id_ejemplar, id_formato, id_pelicula from ejemplar where id_pelicula = " + peli.getId();
+                rs = st.executeQuery(sql);
+                while(rs.next()){
+                    Ejemplar ejemp = new Ejemplar();
+                    ejemp.setId_ejemplar(rs.getInt("id_ejemplar"));
+                    ejemp.setId_formato(rs.getInt("id_formato"));
+                    ejemp.setId_pelicula(rs.getInt("id_pelicula"));
+                    sEjemplar.add(ejemp);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sEjemplar;
+    }
+    public String nombre_peli(int codigo){
+        String nombre="";
+        ResultSet rs3;
         try{
-            String sql = "select id_pelicula, nombre_pelicula from pelicula where upper(nombre_pelicula) like '" + nombre_pelicula + "%'", sql2;
-            rs = st.executeQuery(sql);
-            while(rs.next()){
-                codigo_peli = rs.getInt("id_pelicula");
-                nombre_pel = rs.getString("nombre_pelicula");
-                sql2 = "select id_ejemplar from ejemplar where id_pelicula = " + codigo_peli;
-                rs2 = st.executeQuery(sql2);
-                while(rs2.next()){
-                    ejemplar_pelicula ejemplar = new ejemplar_pelicula();
-                    ejemplar.setCodigo_ejemplar(rs2.getInt("id_ejemplar"));
-                    ejemplar.setNombre_peli(nombre_pel);
-                    sEjemplares.add(ejemplar);
+            nombre ="select nombre_pelicula from pelicula where id_pelicula = " + codigo;
+            rs3 = st.executeQuery(nombre);
+            while(rs3.next()){
+                nombre = rs3.getString("nombre_pelicula");
+            }
+        }catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return nombre;
+    }
+    
+    public ArrayList<ejemplar_pelicula> busqueda_de_ejemplares_disponibles(String nombre_pelicula){
+        ArrayList<ejemplar_pelicula> sEjemps_pelis = new ArrayList<>();
+        ArrayList<Ejemplar> iEjemps;
+        iEjemps = busca_Ejemplar(nombre_pelicula);
+        String sql; int cantidad;
+        try{
+            for(Ejemplar iejemp : iEjemps){
+                sql = "select devuelto from linea where id_ejemplar = " + iejemp.getId_ejemplar();
+                rs = st.executeQuery(sql);
+                cantidad = 0;
+                while(rs.next()){
+                    if (rs.getInt("devuelto") == 0) {
+                        cantidad += 1;
+                    }
+                }
+                if (cantidad ==0) {
+                    ejemplar_pelicula ejemp = new ejemplar_pelicula();
+                    ejemp.setCodigo_ejemplar(iejemp.getId_ejemplar());
+                    ejemp.setNombre_peli(nombre_peli(iejemp.getId_pelicula()));
+                    sEjemps_pelis.add(ejemp);
                 }
             }
         } catch(SQLException ex){
             System.out.println("Error: " + ex.getMessage());
         }
-        return sEjemplares;
+        return sEjemps_pelis;
     }
     
     public Boolean agregarFact(int id_vend, int id_cliente){
@@ -408,4 +447,37 @@ public class conexion {
         }
         return boo;
     }
+    
+    public ArrayList<Factura> buscaFacturas(int codigo){
+        ArrayList<Factura> sFacturas;
+        sFacturas = new ArrayList<>();
+        try{
+            String sql = "select id_factura, fecha_devolucion, precio_total from factura where id_cliente = " + codigo
+                     + " order by fecha_devolucion asc";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Factura iFactura = new Factura();
+                iFactura.setId_factura(rs.getInt("id_factura"));
+                iFactura.setFecha_devolucion(rs.getDate("fecha_devolucion"));
+                iFactura.setTotal(rs.getInt("precio_total"));
+                sFacturas.add(iFactura);
+            }
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return sFacturas;
+    }
+    
+    public Boolean devuelveFactura(int factura){
+        Boolean boo = false;
+        try{
+            CallableStatement cs = myDBCon.prepareCall("{ call pkFactura.sp_devuelve_f(" + factura + ")}");
+            cs.execute();
+            boo = true;
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return boo;
+    }
+    
 }

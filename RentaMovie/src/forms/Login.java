@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     conexion connect = new conexion();
     int x,y;
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -57,6 +58,11 @@ public class Login extends javax.swing.JFrame {
         btnInicio.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         btnInicio.setText("iniciar secion");
         btnInicio.setBorderPainted(false);
+        btnInicio.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnInicioMouseMoved(evt);
+            }
+        });
         btnInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInicioMouseClicked(evt);
@@ -69,10 +75,15 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, 40));
 
-        btnRegistrar.setBackground(new java.awt.Color(204, 255, 255));
+        btnRegistrar.setBackground(new java.awt.Color(150, 200, 220));
         btnRegistrar.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrarse");
         btnRegistrar.setBorderPainted(false);
+        btnRegistrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseMoved(evt);
+            }
+        });
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarMouseClicked(evt);
@@ -86,7 +97,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 160, 40));
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Correo / Username");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 160, 30));
 
@@ -102,7 +113,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 180, 30));
 
         jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Contraseña");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 90, 30));
 
@@ -149,6 +160,7 @@ public class Login extends javax.swing.JFrame {
         cerrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cerrar.setBorderPainted(false);
         cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cerrar.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         cerrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 cerrarMouseMoved(evt);
@@ -194,7 +206,6 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(ColorBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 40));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/result.jpg"))); // NOI18N
         fondo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         fondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -208,7 +219,9 @@ public class Login extends javax.swing.JFrame {
 
     private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
         if (connect.logear(txtUser.getText(), txtPass.getText())) {
-            JOptionPane.showMessageDialog(null, "Logeado exitosamente.");
+            MenuPrincipal ventana = new MenuPrincipal(connect.id_vendedor(txtUser.getText()));
+            this.dispose();
+            ventana.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(null, "Datos ingresados incorrectos, favos intentalo de nuevo.");
         }
@@ -278,10 +291,13 @@ public class Login extends javax.swing.JFrame {
         int key = evt.getKeyCode();
         if (key == KeyEvent.VK_ENTER) {
             if (connect.logear(txtUser.getText(), txtPass.getText())) {
-            JOptionPane.showMessageDialog(null, "Logeado exitosamente.");
-        } else{
-            JOptionPane.showMessageDialog(null, "Datos ingresados incorrectos, favos intentalo de nuevo.");
-        }
+                int id_vend = connect.id_vendedor(txtUser.getText());
+                MenuPrincipal ventana = new MenuPrincipal(id_vend);
+                this.dispose();
+                ventana.setVisible(true);
+            } else{
+                JOptionPane.showMessageDialog(null, "Datos ingresados incorrectos, favos intentalo de nuevo.");
+            }
         }
     }//GEN-LAST:event_txtPassKeyPressed
 
@@ -298,7 +314,17 @@ public class Login extends javax.swing.JFrame {
     private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
+        btnInicio.setBackground(new Color(204,204,204));
+        btnRegistrar.setBackground(new Color(150,200,220));
     }//GEN-LAST:event_fondoMouseMoved
+
+    private void btnInicioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseMoved
+        btnInicio.setBackground(new Color(180, 180, 180));
+    }//GEN-LAST:event_btnInicioMouseMoved
+
+    private void btnRegistrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseMoved
+        btnRegistrar.setBackground(new Color(125, 175, 195));
+    }//GEN-LAST:event_btnRegistrarMouseMoved
 
     /**
      * @param args the command line arguments
@@ -311,7 +337,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows Classic".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -329,10 +355,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 
