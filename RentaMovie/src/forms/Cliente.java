@@ -7,7 +7,6 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
@@ -23,13 +22,14 @@ public class Cliente extends javax.swing.JFrame {
      */
     
     int x,y, codigoo = -1;
+    static int id_vend;
     java.sql.Date fecha_nacc;
     
     conexion connect = new conexion();
     DefaultTableModel dtm = new DefaultTableModel();
     
     
-    public Cliente() {
+    public Cliente(int id) {
         connect.conectarse();
         
         initComponents();
@@ -39,7 +39,7 @@ public class Cliente extends javax.swing.JFrame {
         String [] titulo = new String[]{"Codigo", "Nombre", "Fecha de Nacimiento"};
         dtm.setColumnIdentifiers(titulo);
         jTable1.setModel(dtm);
-        
+        id_vend = id;
     }
 
     /**
@@ -153,7 +153,7 @@ public class Cliente extends javax.swing.JFrame {
         Registrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel13.setText("direccion");
-        Registrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, 20));
+        Registrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, 20));
 
         jLabel14.setText("Correo");
         Registrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
@@ -418,17 +418,16 @@ public class Cliente extends javax.swing.JFrame {
     private void txtNombre_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre_BuscarKeyReleased
         ArrayList<source.Cliente> resultado = new ArrayList<>();
         resultado = connect.buscarCl(txtNombre_Buscar.getText().toUpperCase());
-        dtm.setRowCount(0);
-        for(source.Cliente client : resultado) {
-            if (client.getNombre_cliente() != null) {
-                dtm.addRow(new Object[]{
-                    client.getCodigo(),
-                    client.getNombre_cliente(),
-                    client.getFecha_nac().toString()
-                });
-            }
-        }
         
+        dtm.setRowCount(0);
+        
+        for(source.Cliente client : resultado) {
+            dtm.addRow(new Object[]{
+                client.getCodigo(),
+                client.getNombre_cliente(),
+                client.getFecha_nac().toString()
+            });
+        }
     }//GEN-LAST:event_txtNombre_BuscarKeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -482,7 +481,9 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizar1MouseMoved
 
     private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
-        // TODO add your handling code here:
+        MenuPrincipal ventana = new MenuPrincipal(id_vend);
+        this.dispose();
+        ventana.setVisible(true);
     }//GEN-LAST:event_minimizar1MouseClicked
 
     /**
@@ -515,7 +516,7 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new Cliente(id_vend).setVisible(true);
             }
         });
     }
