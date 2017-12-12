@@ -569,7 +569,7 @@ CREATE OR REPLACE PACKAGE BODY pkFactura IS
         INSERT INTO factura VALUES(s_factura.NEXTVAL, id_cliente, id_vendedor, sysdate, 0, sysdate + 4);
       ELSE
         INSERT INTO factura VALUES(s_factura.NEXTVAL, id_cliente, id_vendedor, sysdate, 0, sysdate + 3);
-      END IF;
+      END IF;   
     END IF;
     EXCEPTION
       WHEN OTHERS THEN
@@ -633,14 +633,13 @@ END;
 
 -- triggers
   -- PARA REGISTRAR LOS UPDATES E INSERTS EN LA TABLA HISTORICO
-CREATE OR REPLACE TRIGGER tgr_formato
+create or replace TRIGGER tgr_formato
   AFTER UPDATE OR INSERT ON FORMATO
   FOR EACH ROW
 BEGIN
   if UPDATING THEN
     insert into historico values(sysdate, 'FORMATO', :OLD.id_formato, ' update ', :old.precio, :new.precio);
   else 
-    insert into historico values(sysdate, 'FORMATO', :OLD.id_formato, ' insert ', :new.precio, :new.precio);
+    insert into historico values(sysdate, 'FORMATO', :new.id_formato, ' insert ', :new.precio, :new.precio);
   end if;
 end;
-  -- 
