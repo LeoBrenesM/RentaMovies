@@ -7,22 +7,14 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
 
-/**
- *
- * @author lbren
- */
 public class Pelicula extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Cliente
-     */
     
     int x,y, codigoo = -1, codigon = -3, codigo_peli_ejemplar = -1, codigo_formato_ejemplar = -1;
+    static int id_vend;
     String nombre_peli;
     java.sql.Date fecha_nacc;
     
@@ -31,13 +23,13 @@ public class Pelicula extends javax.swing.JFrame {
     DefaultTableModel dtm2 = new DefaultTableModel();
     DefaultTableModel dtm3 = new DefaultTableModel();
     
-    public Pelicula() {
+    public Pelicula(int id) {
         connect.conectarse();
         
         initComponents();
         
         this.setLocationRelativeTo(null);
-        
+        id_vend = id;
         //table
         String [] titulo = new String[]{"Codigo", "Nombre de Pelicula"};
         dtm.setColumnIdentifiers(titulo);
@@ -767,7 +759,7 @@ public class Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizar1MouseMoved
 
     private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
-        MenuPrincipal ventana = new MenuPrincipal();
+        MenuPrincipal ventana = new MenuPrincipal(id_vend);
         this.dispose();
         ventana.setVisible(true);
     }//GEN-LAST:event_minimizar1MouseClicked
@@ -998,7 +990,7 @@ public class Pelicula extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pelicula().setVisible(true);
+                new Pelicula(id_vend).setVisible(true);
             }
         });
     }
