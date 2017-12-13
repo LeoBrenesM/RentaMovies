@@ -6,6 +6,8 @@
 package forms;
 
 import java.awt.Color;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import source.conexion;
 import javax.swing.JOptionPane;
 
@@ -37,6 +39,7 @@ public class Registrar extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRegistrar = new javax.swing.JButton();
+        minimizar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         lblcontra = new javax.swing.JLabel();
@@ -56,7 +59,6 @@ public class Registrar extends javax.swing.JFrame {
         txtanno = new javax.swing.JTextField();
         mover = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
-        minimizar1 = new javax.swing.JButton();
         minimizar = new javax.swing.JButton();
         ColorBarra = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -86,6 +88,24 @@ public class Registrar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 160, 40));
+
+        minimizar1.setBackground(new java.awt.Color(46, 51, 58));
+        minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
+        minimizar1.setForeground(new java.awt.Color(255, 255, 255));
+        minimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        minimizar1.setBorder(null);
+        minimizar1.setBorderPainted(false);
+        minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                minimizar1MouseMoved(evt);
+            }
+        });
+        minimizar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 60, 40));
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
         jLabel1.setText("Correo / Username");
@@ -223,24 +243,6 @@ public class Registrar extends javax.swing.JFrame {
         });
         getContentPane().add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 60, 40));
 
-        minimizar1.setBackground(new java.awt.Color(46, 51, 58));
-        minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
-        minimizar1.setForeground(new java.awt.Color(255, 255, 255));
-        minimizar1.setText("a");
-        minimizar1.setBorder(null);
-        minimizar1.setBorderPainted(false);
-        minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                minimizar1MouseMoved(evt);
-            }
-        });
-        minimizar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizar1MouseClicked(evt);
-            }
-        });
-        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 60, 40));
-
         minimizar.setBackground(new java.awt.Color(46, 51, 58));
         minimizar.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
         minimizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -297,6 +299,8 @@ public class Registrar extends javax.swing.JFrame {
 
     private void moverMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseMoved
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_moverMouseMoved
 
     private void moverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseClicked
@@ -331,6 +335,8 @@ public class Registrar extends javax.swing.JFrame {
     private void minimizarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseMoved
         minimizar.setBackground(new Color(32, 178, 170));
         cerrar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizarMouseMoved
 
     private void minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseClicked
@@ -368,6 +374,8 @@ public class Registrar extends javax.swing.JFrame {
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
         btnRegistrar.setBackground(new Color(150,200,220));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_fondoMouseMoved
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
@@ -390,19 +398,21 @@ public class Registrar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPass1KeyReleased
 
+    private void btnRegistrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseMoved
+        btnRegistrar.setBackground(new Color(125,175,195));
+    }//GEN-LAST:event_btnRegistrarMouseMoved
+
     private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
-        // TODO add your handling code here:
+        minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return2.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizar1MouseMoved
 
     private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
         Login ventana = new Login();
         this.dispose();
-        ventana.setVisible(true);        
+        ventana.setVisible(true);
     }//GEN-LAST:event_minimizar1MouseClicked
-
-    private void btnRegistrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseMoved
-        btnRegistrar.setBackground(new Color(125,175,195));
-    }//GEN-LAST:event_btnRegistrarMouseMoved
 
     /**
      * @param args the command line arguments

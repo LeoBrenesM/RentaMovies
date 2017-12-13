@@ -30,6 +30,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         Cliente2 = new javax.swing.JButton();
         Cliente1 = new javax.swing.JButton();
         Cliente = new javax.swing.JButton();
@@ -38,23 +40,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mover = new javax.swing.JButton();
         ColorBarra = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Cliente2.setText("Gestion prestamos");
+        jLabel1.setText("Prestamos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+
+        jLabel2.setText("Peliculas / Ejemplares");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+
+        Cliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money.png"))); // NOI18N
+        Cliente2.setBorderPainted(false);
+        Cliente2.setContentAreaFilled(false);
         Cliente2.setName(""); // NOI18N
+        Cliente2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money2.png"))); // NOI18N
         Cliente2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Cliente2ActionPerformed(evt);
             }
         });
-        getContentPane().add(Cliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 170, 190));
+        getContentPane().add(Cliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, 180));
 
-        Cliente1.setText("Peliculas / ejemplares");
+        Cliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/compact-disc.png"))); // NOI18N
+        Cliente1.setBorderPainted(false);
+        Cliente1.setContentAreaFilled(false);
         Cliente1.setName(""); // NOI18N
+        Cliente1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/compact-disc2.png"))); // NOI18N
         Cliente1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Cliente1MouseClicked(evt);
@@ -67,8 +82,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(Cliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 170, 190));
 
-        Cliente.setText("Cliente");
+        Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        Cliente.setBorderPainted(false);
+        Cliente.setContentAreaFilled(false);
         Cliente.setName(""); // NOI18N
+        Cliente.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user2.png"))); // NOI18N
         Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ClienteActionPerformed(evt);
@@ -163,6 +181,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 480));
+
+        jLabel3.setText("Clientes");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -290,6 +311,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel ColorBarra;
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton mover;
     // End of variables declaration//GEN-END:variables

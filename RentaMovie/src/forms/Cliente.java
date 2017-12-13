@@ -7,6 +7,8 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
@@ -280,7 +282,7 @@ public class Cliente extends javax.swing.JFrame {
         minimizar1.setBackground(new java.awt.Color(46, 51, 58));
         minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
         minimizar1.setForeground(new java.awt.Color(255, 255, 255));
-        minimizar1.setText("a");
+        minimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
         minimizar1.setBorder(null);
         minimizar1.setBorderPainted(false);
         minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -344,6 +346,8 @@ public class Cliente extends javax.swing.JFrame {
     private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_fondoMouseMoved
 
     private void ColorBarraMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColorBarraMouseMoved
@@ -356,6 +360,8 @@ public class Cliente extends javax.swing.JFrame {
 
     private void moverMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseMoved
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_moverMouseMoved
 
     private void moverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseClicked
@@ -390,6 +396,8 @@ public class Cliente extends javax.swing.JFrame {
     private void minimizarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseMoved
         minimizar.setBackground(new Color(32, 178, 170));
         cerrar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizarMouseMoved
 
     private void minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseClicked
@@ -477,7 +485,9 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
-        // TODO add your handling code here:
+        minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return2.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizar1MouseMoved
 
     private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked

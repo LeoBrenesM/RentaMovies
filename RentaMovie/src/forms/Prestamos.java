@@ -7,6 +7,8 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
@@ -77,8 +79,6 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -227,15 +227,14 @@ public class Prestamos extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 220));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 410, 80));
-
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton3.setText("LISTO");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 100, 50));
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 100, 50));
 
         jTabbedPane1.addTab("Factura", jPanel1);
 
@@ -351,7 +350,7 @@ public class Prestamos extends javax.swing.JFrame {
                 moverMousePressed(evt);
             }
         });
-        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 40));
+        getContentPane().add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 40));
 
         cerrar.setBackground(new java.awt.Color(46, 51, 58));
         cerrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -374,7 +373,8 @@ public class Prestamos extends javax.swing.JFrame {
         minimizar1.setBackground(new java.awt.Color(46, 51, 58));
         minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
         minimizar1.setForeground(new java.awt.Color(255, 255, 255));
-        minimizar1.setText("a");
+        minimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        minimizar1.setBorder(null);
         minimizar1.setBorderPainted(false);
         minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -386,7 +386,7 @@ public class Prestamos extends javax.swing.JFrame {
                 minimizar1MouseClicked(evt);
             }
         });
-        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 70, 40));
+        getContentPane().add(minimizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 60, 40));
 
         minimizar.setBackground(new java.awt.Color(46, 51, 58));
         minimizar.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
@@ -437,6 +437,8 @@ public class Prestamos extends javax.swing.JFrame {
     private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_fondoMouseMoved
 
     private void ColorBarraMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColorBarraMouseMoved
@@ -449,6 +451,8 @@ public class Prestamos extends javax.swing.JFrame {
 
     private void moverMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseMoved
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_moverMouseMoved
 
     private void moverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseClicked
@@ -483,22 +487,14 @@ public class Prestamos extends javax.swing.JFrame {
     private void minimizarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseMoved
         minimizar.setBackground(new Color(32, 178, 170));
         cerrar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizarMouseMoved
 
     private void minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseClicked
         this.setExtendedState(ICONIFIED);
         minimizar.setBackground(new Color(0, 102, 102));
     }//GEN-LAST:event_minimizarMouseClicked
-
-    private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_minimizar1MouseMoved
-
-    private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
-        MenuPrincipal ventana = new MenuPrincipal(id_vend);
-        this.dispose();
-        ventana.setVisible(true);
-    }//GEN-LAST:event_minimizar1MouseClicked
 
     private void txtTituloBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloBKeyReleased
         ArrayList<source.ejemplar_pelicula> iPeliculas = new ArrayList<>();
@@ -542,18 +538,19 @@ public class Prestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (codigon != -3) {
+        if (codigon != -3 && factura == 0) {
             if (connect.agregarFact(id_vend, codigon)) {
                 fact += " - FACTURA - \n"
                         + "Cliente: " + codigon + "\n"
                         + "Codigo de Vendedor: " + id_vend;
                 codigon = -3;
-                jTextArea1.setText(fact);
                 factura = 1;
                 JOptionPane.showMessageDialog(null, "Factura Creada correctamente");
             } else{
                 JOptionPane.showMessageDialog(null, "No creada correctamente");
             }
+        } else{
+            JOptionPane.showMessageDialog(null, "No creada correctamente");
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -621,6 +618,28 @@ public class Prestamos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
+    private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
+        minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return2.png"));
+        minimizar1.setIcon(foto);
+    }//GEN-LAST:event_minimizar1MouseMoved
+
+    private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
+        MenuPrincipal ventana = new MenuPrincipal(id_vend);
+        this.dispose();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_minimizar1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        if (factura == 1) {
+            JOptionPane.showMessageDialog(null,"Factura guardada correctamente");
+            factura = 0;
+        }else{
+            JOptionPane.showMessageDialog(null,"Factura NO guardada correctamente");
+        }
+        
+    }//GEN-LAST:event_jButton3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -686,13 +705,11 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton minimizar;
     private javax.swing.JButton minimizar1;
     private javax.swing.JButton mover;

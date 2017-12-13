@@ -7,6 +7,8 @@ package forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
@@ -482,6 +484,11 @@ public class Pelicula extends javax.swing.JFrame {
         Ejemplares.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel8.setBackground(new java.awt.Color(220, 230, 230));
+        jPanel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel8MouseMoved(evt);
+            }
+        });
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setBackground(new java.awt.Color(200, 220, 220));
@@ -498,6 +505,11 @@ public class Pelicula extends javax.swing.JFrame {
         jButton6.setForeground(new java.awt.Color(250, 250, 250));
         jButton6.setText("AGREGAR");
         jButton6.setBorderPainted(false);
+        jButton6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton6MouseMoved(evt);
+            }
+        });
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton6MouseClicked(evt);
@@ -632,7 +644,7 @@ public class Pelicula extends javax.swing.JFrame {
         minimizar1.setBackground(new java.awt.Color(46, 51, 58));
         minimizar1.setFont(new java.awt.Font("Broadway", 1, 36)); // NOI18N
         minimizar1.setForeground(new java.awt.Color(255, 255, 255));
-        minimizar1.setText("a");
+        minimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
         minimizar1.setBorder(null);
         minimizar1.setBorderPainted(false);
         minimizar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -697,6 +709,8 @@ public class Pelicula extends javax.swing.JFrame {
     private void fondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseMoved
         cerrar.setBackground(new Color(46, 51, 58));
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_fondoMouseMoved
 
     private void ColorBarraMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColorBarraMouseMoved
@@ -709,6 +723,8 @@ public class Pelicula extends javax.swing.JFrame {
 
     private void moverMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseMoved
         minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_moverMouseMoved
 
     private void moverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseClicked
@@ -743,6 +759,8 @@ public class Pelicula extends javax.swing.JFrame {
     private void minimizarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseMoved
         minimizar.setBackground(new Color(32, 178, 170));
         cerrar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizarMouseMoved
 
     private void minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseClicked
@@ -751,11 +769,13 @@ public class Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizarMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void minimizar1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseMoved
-        // TODO add your handling code here:
+        minimizar.setBackground(new Color(46, 51, 58));
+        Icon foto = new ImageIcon(getClass().getResource("/img/return2.png"));
+        minimizar1.setIcon(foto);
     }//GEN-LAST:event_minimizar1MouseMoved
 
     private void minimizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizar1MouseClicked
@@ -913,7 +933,6 @@ public class Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_f_precionActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        // pfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         if (codigo_peli_ejemplar != -1) {
             if (codigo_formato_ejemplar != -1) {
                 if (Integer.parseInt(txt_cantidad.getText()) > 0) {
@@ -922,6 +941,9 @@ public class Pelicula extends javax.swing.JFrame {
                         codigo_peli_ejemplar = -1;
                         codigo_formato_ejemplar = -1;
                         txt_cantidad.setText("0");
+                        JOptionPane.showMessageDialog(null, "Registro realizado!");
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Registro No realizado correctamente!");
                     }
                 } else{
                     JOptionPane.showMessageDialog(null, "Recuerda ingresar una cantidad correcta de peliculas.");
@@ -958,6 +980,14 @@ public class Pelicula extends javax.swing.JFrame {
     private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cantidadActionPerformed
+
+    private void jButton6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseMoved
+        jButton6.setBackground(new Color(70, 130, 130));
+    }//GEN-LAST:event_jButton6MouseMoved
+
+    private void jPanel8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseMoved
+        jButton6.setBackground(new Color(100, 150, 150));
+    }//GEN-LAST:event_jPanel8MouseMoved
 
     /**
      * @param args the command line arguments
