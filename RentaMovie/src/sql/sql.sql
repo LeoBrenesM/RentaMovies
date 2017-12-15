@@ -661,3 +661,6 @@ BEGIN
     insert into historico values(sysdate, 'FORMATO', :new.id_formato, ' insert ', :new.precio, :new.precio);
   end if;
 end;
+
+
+select * from pelicula;
