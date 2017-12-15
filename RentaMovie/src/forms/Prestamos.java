@@ -88,7 +88,6 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         txtNombre1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         facturas_clientes = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -262,7 +261,7 @@ public class Prestamos extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(clientes);
 
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 470, 120));
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 470, 150));
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 35)); // NOI18N
         jLabel3.setText(" 1");
@@ -287,14 +286,6 @@ public class Prestamos extends javax.swing.JFrame {
         });
         jPanel7.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 360, -1));
 
-        jButton4.setText("Devolver Discos");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
-            }
-        });
-        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 140, 40));
-
         facturas_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -313,10 +304,10 @@ public class Prestamos extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(facturas_clientes);
 
-        jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 470, 140));
+        jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 470, 190));
 
         jLabel6.setText("Facturas");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, -1, -1));
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 530));
 
@@ -568,10 +559,6 @@ public class Prestamos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseClicked
-
     private void txtNombre1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyReleased
         ArrayList<source.Cliente> resultado = new ArrayList<>();
         resultado = connect.buscarCl(txtNombre1.getText().toUpperCase());
@@ -687,7 +674,6 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

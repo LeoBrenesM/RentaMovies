@@ -1,4 +1,4 @@
---en el sql plus o sql command line escribe esto:
+    --en el sql plus o sql command line escribe esto:
 
 CREATE USER proyecto IDENTIFIED BY 1234;
 --le da enter
@@ -553,6 +553,7 @@ increment by 1;
 
 CREATE OR REPLACE PACKAGE pkFactura IS
   PROCEDURE sp_agregar_f(id_vendedor IN number, id_cliente IN NUMBER);
+  PROCEDURE sp_lineas(datos out sys_refcursor, id_fac in number);
   PROCEDURE sp_devuelve_f(id_fac in number);
 END;
 
@@ -579,13 +580,30 @@ CREATE OR REPLACE PACKAGE BODY pkFactura IS
         insert into auditoria values(usuario, ' FACTURA ', sysdate, vmes, nerror );
   END;
   
-  PROCEDURE sp_devuelve_f(id_fac in number)
+  
+  PROCEDURE sp_lineas(datos out sys_refcursor, id_fac in number) --esto lo agregue para usar sql dinamico y sys_refcursor..
+  as
+  vsql varchar2(300);
+  begin
+  vsql := 'select id_factura, id_ejemplar from linea where id_factura = :id_fac';
+    open datos for vsql using id_fac;
+  end;
+  
+  PROCEDURE sp_devuelve_f(id_fac in number)  --por consiguiente aqui hice cambios....
   as
     VMES VARCHAR2(500);
     NERROR NUMBER;
     usuario varchar2(8);
+    datosb sys_refcursor;
+    vid_factura number;
+    id_ejem number;
   begin
-    update linea set devuelto = 1 where id_factura = id_fac;
+    pkfactura.sp_lineas(datosb, id_fac);
+    LOOP
+      FETCH datosb into vid_factura, id_ejem;
+      EXIT WHEN datosb%notfound;
+        update linea set devuelto = 1 where id_factura = vid_factura and id_ejemplar = id_ejem;
+    END LOOP;
     commit;
   EXCEPTION
       WHEN OTHERS THEN

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package forms;
 
 import java.awt.Color;
@@ -11,10 +6,6 @@ import javax.swing.ImageIcon;
 import source.conexion;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author lbren
- */
 public class Registrar extends javax.swing.JFrame {
 
     /**

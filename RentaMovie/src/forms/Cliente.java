@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package forms;
 
 import java.awt.Color;
@@ -13,10 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import source.conexion;
 
-/**
- *
- * @author lbren
- */
 public class Cliente extends javax.swing.JFrame {
 
     /**
@@ -99,7 +90,7 @@ public class Cliente extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPane1.setBackground(new java.awt.Color(46, 150, 161));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         Registrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Registrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
